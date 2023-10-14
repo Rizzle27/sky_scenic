@@ -16,6 +16,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
-Route::get('/quienes-somos', [\App\Http\Controllers\HomeController::class, 'about']);
-
-Route::get('/galeria', [\App\Http\Controllers\PhotosController::class, 'index']);
+Route::get('/noticias', [\App\Http\Controllers\HomeController::class, 'news']);
