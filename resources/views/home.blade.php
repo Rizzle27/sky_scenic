@@ -7,10 +7,10 @@
 @section('intro')
     <section class="d-flex justify-content-center align-items-center py-5" style="min-height: 600px">
         @auth
-            <h2 class="text-light" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</h2>
+            <h2 class="text-light  text-center w-50" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</h2>
         @endauth
         @guest
-            <h2 class="text-light" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido a Sky Scenic!</h2>
+            <h2 class="text-light  text-center w-50" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido a Sky Scenic!</h2>
         @endguest
     </section>
 @endsection

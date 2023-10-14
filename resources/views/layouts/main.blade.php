@@ -26,8 +26,7 @@
                 <button id="login-close" class="text-light bg-transparent rounded-pill"
                     style="width: 32px; height: 32px; border: 2px solid #3E74FF !important;">X</button>
             </div>
-            @auth<p class="fs-4 text-light">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</p>
-            @endauth
+            @auth<p class="fs-4 text-light">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</p>@endauth
             @guest<p class="fs-4 text-light">¡Bienvenido a Sky Scenic!@endguest
 
         </div>
