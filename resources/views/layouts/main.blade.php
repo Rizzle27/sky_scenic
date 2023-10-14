@@ -33,7 +33,7 @@
 
         <div class="col-8">
             @auth
-                <form action="" method="POST">
+                <form action="{{ route('auth.logout.process') }}" method="POST">
                     @csrf
                     <button class="hvr-shutter-out-horizontal fs-5 my-3 text-light w-100 rounded-pill py-1 px-3"
                         style="border: 2px solid #3E74FF !important;" type="submit">Cerrar
@@ -178,7 +178,7 @@
             <div>
                 <ul class="d-flex gap-4 m-0 list-unstyled">
                     <li><a href={{ url('/') }} class="text-light text-decoration-none">Galería</a></li>
-                    <li><a href={{ url('/') }} class="text-light text-decoration-none">Noticias</a></li>
+                    <li><a href={{ url('/noticias') }} class="text-light text-decoration-none">Noticias</a></li>
                 </ul>
             </div>
         </section>

@@ -15,6 +15,12 @@ class AuthController extends Controller
             return redirect()->back()->with('loginError', 'Las credenciales son inválidas')->withInput();
         }
 
-        return redirect('.')->with('logged.user', auth()->user()->username);
+        return redirect()->route('index')->with('logged.user', auth()->user()->username);
+    }
+
+    public function logoutProcess(Request $request) {
+        Auth::logout();
+
+        return redirect()->route('index');
     }
 }

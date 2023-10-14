@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+    ->name('index');
 
 Route::get('/noticias', [\App\Http\Controllers\HomeController::class, 'news']);
 
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
+Route::post('/iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
     ->name('auth.login.process');
+
+Route::post('/cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logoutProcess'])
+    ->name('auth.logout.process');
