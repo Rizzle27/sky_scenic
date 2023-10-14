@@ -17,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/noticias', [\App\Http\Controllers\HomeController::class, 'news']);
+
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
+    ->name('auth.login.process');
