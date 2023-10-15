@@ -18,6 +18,12 @@ class PhotosController extends Controller
 
     public function view(int $id)
     {
+        $photo = Photo::find($id);
+        $photos = Photo::all();
 
+        return view('photos/view', [
+            'photo' => $photo,
+            'photos' => $photos
+        ]);
     }
 }

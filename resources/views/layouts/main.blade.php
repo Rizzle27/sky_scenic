@@ -24,13 +24,19 @@
         @php
             $background = './images/2405507_1696423034.jpg';
         @endphp
+    @elseif (Str::contains(request()->url(), '/fotos'))
+        @php
+            $background = null;
+        @endphp
     @else
         @php
             $background = './images/background.jpg';
         @endphp
     @endif
 
-    <img id="background-image" src="<?= $background ?>" alt="">
+    @if ($background != null)
+        <img id="background-image" src="<?= $background ?>" alt="">
+    @endif
 
     <section id="login-section"
         class="flex-column align-items-center justify-content-center position-fixed col-8 col-md-6 col-lg-5 gap-5">
@@ -139,7 +145,11 @@
         </div>
     </section>
 
-    <section id="nav-container">
+    <section id="nav-container"
+    @if ($background == null)
+        style="background-color: #292929"
+    @endif
+>
         <nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
             <div style="z-index: 200;">
                 <h1 class="rafginsFont fs-3 m-0"><a href={{ url('/') }}
@@ -148,7 +158,7 @@
             </div>
             <div>
                 <ul class="d-flex align-items-center gap-4 m-0 list-unstyled">
-                    <li><a href={{ url('/galeria') }}
+                    <li><a href={{ url('/') }}
                             class="hvr-underline-from-left text-light text-decoration-none">Galería</a></li>
                     <li><a href={{ url('/noticias') }}
                             class="hvr-underline-from-left text-light text-decoration-none">Noticias</a></li>
@@ -194,7 +204,7 @@
             </div>
             <div>
                 <ul class="d-flex gap-4 m-0 list-unstyled">
-                    <li><a href={{ url('/galeria') }} class="text-light text-decoration-none">Galería</a></li>
+                    <li><a href={{ url('/') }} class="text-light text-decoration-none">Galería</a></li>
                     <li><a href={{ url('/noticias') }} class="text-light text-decoration-none">Noticias</a></li>
                 </ul>
             </div>
