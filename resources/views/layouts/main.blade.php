@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -16,6 +16,22 @@
 </head>
 
 <body>
+    @if (Str::contains(request()->url(), '/admin'))
+        @php
+            $background = './images/764785_1678852953.jpg';
+        @endphp
+    @elseif (Str::contains(request()->url(), '/noticias'))
+        @php
+            $background = './images/2405507_1696423034.jpg';
+        @endphp
+    @else
+        @php
+            $background = './images/background.jpg';
+        @endphp
+    @endif
+
+    <img id="background-image" src="<?= $background ?>" alt="">
+
     <section id="login-section"
         class="flex-column align-items-center justify-content-center position-fixed col-8 col-md-6 col-lg-5 gap-5">
         <div class="col-8">
@@ -26,7 +42,8 @@
                 <button id="login-close" class="text-light bg-transparent rounded-pill"
                     style="width: 32px; height: 32px; border: 2px solid #3E74FF !important;">X</button>
             </div>
-            @auth<p class="fs-4 text-light">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</p>@endauth
+            @auth<p class="fs-4 text-light">¡Bienvenido de nuevo a Sky Scenic {{ auth()->user()->username }}!</p>
+            @endauth
             @guest<p class="fs-4 text-light">¡Bienvenido a Sky Scenic!@endguest
 
         </div>
@@ -126,13 +143,12 @@
         <nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
             <div style="z-index: 200;">
                 <h1 class="rafginsFont fs-3 m-0"><a href={{ url('/') }}
-                        class="text-light text-decoration-none">Sky
-                        Scenic</a>
+                        class="text-light text-decoration-none">Sky<span style="color: #3E74FF">Scenic</span></a>
                 </h1>
             </div>
             <div>
                 <ul class="d-flex align-items-center gap-4 m-0 list-unstyled">
-                    <li><a href={{ url('/') }}
+                    <li><a href={{ url('/galeria') }}
                             class="hvr-underline-from-left text-light text-decoration-none">Galería</a></li>
                     <li><a href={{ url('/noticias') }}
                             class="hvr-underline-from-left text-light text-decoration-none">Noticias</a></li>
@@ -147,6 +163,8 @@
                                 style="border: 2px solid #3E74FF;">Iniciar Sesión</button></li>
                     @endguest
                     @auth
+                        <li><a href={{ url('/subir') }}
+                                class="hvr-underline-from-left text-light text-decoration-none">Subir Fotos</a></li>
 
                         @if (auth()->user()->role == 'admin')
                             <li><a href={{ url('/admin') }}
@@ -163,9 +181,8 @@
         </nav>
         @yield('intro')
     </section>
-    <main class="d-flex flex-column text-center py-5" style="background-color: #1E1E1E">
-        @yield('content')
-    </main>
+
+    @yield('content')
 
     <footer class="footer d-flex justify-content-center" style="background-color: #3E74FF; min-height: 100px;">
         <section class="d-flex justify-content-between align-items-center col-8">
@@ -177,28 +194,12 @@
             </div>
             <div>
                 <ul class="d-flex gap-4 m-0 list-unstyled">
-                    <li><a href={{ url('/') }} class="text-light text-decoration-none">Galería</a></li>
+                    <li><a href={{ url('/galeria') }} class="text-light text-decoration-none">Galería</a></li>
                     <li><a href={{ url('/noticias') }} class="text-light text-decoration-none">Noticias</a></li>
                 </ul>
             </div>
         </section>
     </footer>
-
-    @if (Str::contains(request()->url(), '/noticias'))
-        @php
-            $background = './images/1350430_1696035583.jpg';
-        @endphp
-    @else
-        @php
-            $background = './images/background.jpg';
-        @endphp
-    @endif
-
-    <style>
-        #nav-container::before {
-            background-image: url({{ $background }});
-        }
-    </style>
 </body>
 
 </html>

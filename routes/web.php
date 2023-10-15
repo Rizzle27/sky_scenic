@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+// Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
+// ->name('index');
+
+Route::get('/', [\App\Http\Controllers\PhotosController::class, 'galeria'])
     ->name('index');
 
-Route::get('/noticias', [\App\Http\Controllers\HomeController::class, 'news']);
+Route::get('/fotos/{id}', [\App\Http\Controllers\PhotosController::class, 'view']);
+
+Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
+
+Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])
+    ->middleware(['auth', 'admin']);
 
 Route::post('/iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
     ->name('auth.login.process');
