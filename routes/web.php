@@ -17,10 +17,17 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', [\App\Http\Controllers\HomeController::class, 'index'])
 // ->name('index');
 
-Route::get('/', [\App\Http\Controllers\PhotosController::class, 'galeria'])
+Route::get('/', [\App\Http\Controllers\PhotosController::class, 'gallery'])
     ->name('index');
 
-Route::get('/fotos/{id}', [\App\Http\Controllers\PhotosController::class, 'view']);
+Route::get('/fotos/{id}', [\App\Http\Controllers\PhotosController::class, 'view'])
+    ->whereNumber('id');
+
+Route::get('/fotos/subir', [\App\Http\Controllers\PhotosController::class, 'uploadForm'])
+    ->middleware(['auth']);
+
+Route::post('/fotos/subir', [\App\Http\Controllers\PhotosController::class, 'uploadProcess'])
+    ->middleware(['auth']);
 
 Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
 

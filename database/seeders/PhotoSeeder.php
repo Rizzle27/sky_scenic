@@ -15,7 +15,7 @@ class PhotoSeeder extends Seeder
     {
         DB::table('photos')->insert([
             [
-                'plane' => "Boeing 747-481(BCF)",
+                'aircraft' => "Boeing 747-481(BCF)",
                 'license_plate' => "TF-AMP",
                 'airline' => "Magma Aviation (Air Atlanta Icelandic)",
                 'location' => "Cologne/Bonn Konrad Adenauer Airport - EDDK",

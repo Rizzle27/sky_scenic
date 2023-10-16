@@ -18,19 +18,19 @@
 <body>
     @if (Str::contains(request()->url(), '/admin'))
         @php
-            $background = './images/764785_1678852953.jpg';
+            $background = 'https://cdn.jetphotos.com/full/5/764785_1678852953.jpg';
         @endphp
     @elseif (Str::contains(request()->url(), '/noticias'))
         @php
-            $background = './images/2405507_1696423034.jpg';
+            $background = 'https://cdn.jetphotos.com/full/5/515925_1696167458.jpg';
         @endphp
-    @elseif (Str::contains(request()->url(), '/fotos'))
+    @elseif (request()->is("/"))
         @php
-            $background = null;
+            $background = 'https://cdn.jetphotos.com/full/5/856374_1696001896.jpg';
         @endphp
     @else
         @php
-            $background = './images/background.jpg';
+            $background = null;
         @endphp
     @endif
 
@@ -145,11 +145,7 @@
         </div>
     </section>
 
-    <section id="nav-container"
-    @if ($background == null)
-        style="background-color: #292929"
-    @endif
->
+    <section id="nav-container" @if ($background == null) style="background-color: #292929" @endif>
         <nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
             <div style="z-index: 200;">
                 <h1 class="rafginsFont fs-3 m-0"><a href={{ url('/') }}
@@ -173,8 +169,8 @@
                                 style="border: 2px solid #3E74FF;">Iniciar Sesión</button></li>
                     @endguest
                     @auth
-                        <li><a href={{ url('/subir') }}
-                                class="hvr-underline-from-left text-light text-decoration-none">Subir Fotos</a></li>
+                        <li><a href={{ url('/fotos/subir') }}
+                                class="hvr-underline-from-left text-light text-decoration-none">Subir Foto</a></li>
 
                         @if (auth()->user()->role == 'admin')
                             <li><a href={{ url('/admin') }}

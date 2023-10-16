@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->string('plane');
+            $table->string('aircraft');
             $table->string('license_plate');
             $table->string('airline');
             $table->string('location');
