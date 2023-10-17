@@ -31,6 +31,12 @@ Route::post('/fotos/subir', [\App\Http\Controllers\PhotosController::class, 'upl
 
 Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
 
+Route::get('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadForm'])
+    ->middleware(['auth']);
+
+Route::post('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadProcess'])
+    ->middleware(['auth']);
+
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])
     ->middleware(['auth', 'admin']);
 

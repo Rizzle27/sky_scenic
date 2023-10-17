@@ -20,7 +20,8 @@ class PhotoSeeder extends Seeder
                 'airline' => "Magma Aviation (Air Atlanta Icelandic)",
                 'location' => "Cologne/Bonn Konrad Adenauer Airport - EDDK",
                 'country' => "Germany",
-                'img_path' => "934818_1696070552.jpg",
+                'img_path' => "https://cdn.jetphotos.com/full/6/877468_1680776764.jpg",
+                'author' => 'rizzle27',
                 'date' => now(),
                 'created_at' => now(),
                 'updated_at' => now()

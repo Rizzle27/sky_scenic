@@ -1,3 +1,9 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 #background-image {
     position: fixed;
     z-index: -1;
@@ -73,6 +79,44 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .featureSection textarea {
     overflow-y: hidden;
+}
+
+.cardContainer {
+    column-gap: 20px;
+}
+
+.cardContainer .photoCard {
+    margin: 0 0 20px;
+    overflow: hidden;
+    break-inside: avoid;
+}
+
+.secondaryDailyPhotosCard {
+    flex: 1;
+}
+
+@media screen and (max-width: 576px) {
+    .cardContainer {
+        columns: 1;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .cardContainer {
+        columns: 2;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+    .cardContainer {
+        columns: 3;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .cardContainer {
+        columns: 4;
+    }
 }
 
 /* Animaciones de librería */

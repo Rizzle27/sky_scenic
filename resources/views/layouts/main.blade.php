@@ -20,11 +20,11 @@
         @php
             $background = 'https://cdn.jetphotos.com/full/5/764785_1678852953.jpg';
         @endphp
-    @elseif (Str::contains(request()->url(), '/noticias'))
+    @elseif (request()->is('noticias'))
         @php
             $background = 'https://cdn.jetphotos.com/full/5/515925_1696167458.jpg';
         @endphp
-    @elseif (request()->is("/"))
+    @elseif (request()->is('/'))
         @php
             $background = 'https://cdn.jetphotos.com/full/5/856374_1696001896.jpg';
         @endphp
@@ -35,7 +35,7 @@
     @endif
 
     @if ($background != null)
-        <img id="background-image" src="<?= $background ?>" alt="">
+        <img id="background-image" src="<?= $background ?>" alt="SkyScenic background">
     @endif
 
     <section id="login-section"
@@ -173,6 +173,9 @@
                                 class="hvr-underline-from-left text-light text-decoration-none">Subir Foto</a></li>
 
                         @if (auth()->user()->role == 'admin')
+                            <li><a href={{ url('/noticias/subir') }}
+                                    class="hvr-underline-from-left text-light text-decoration-none">Subir Noticia</a></li>
+
                             <li><a href={{ url('/admin') }}
                                     class="hvr-underline-from-left text-light text-decoration-none">Admin</a></li>
                         @endif
@@ -191,9 +194,9 @@
     @yield('content')
 
     <footer class="footer d-flex justify-content-center" style="background-color: #3E74FF; min-height: 100px;">
-        <section class="d-flex justify-content-between align-items-center col-8">
+        <section class="d-flex flex-column flex-lg-row text-center justify-content-between align-items-center col-8 gap-4 py-2">
             <div>
-                <h3 class="text-light m-0">Sky Scenic</h3>
+                <h3 class="text-light m-0">SkyScenic</h3>
             </div>
             <div>
                 <p class="m-0 text-light">©️Portales y Comercio Electrónico | García, Agüero, Stella</p>
