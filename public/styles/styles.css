@@ -91,6 +91,16 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     break-inside: avoid;
 }
 
+.newsCardContainer {
+    column-gap: 20px;
+}
+
+.newsCardContainer .newCard {
+    margin: 0 0 20px;
+    overflow: hidden;
+    break-inside: avoid;
+}
+
 .secondaryDailyPhotosCard {
     flex: 1;
 }
@@ -99,10 +109,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .cardContainer {
         columns: 1;
     }
+
+    .newsCardContainer {
+        columns: 1;
+    }
 }
 
 @media screen and (min-width: 576px) and (max-width: 768px) {
     .cardContainer {
+        columns: 2;
+    }
+
+    .newsCardContainer {
         columns: 2;
     }
 }
@@ -111,11 +129,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .cardContainer {
         columns: 3;
     }
+
+    .newsCardContainer {
+        columns: 2;
+    }
 }
 
 @media screen and (min-width: 992px) {
     .cardContainer {
         columns: 4;
+    }
+
+    .newsCardContainer {
+        columns: 3;
     }
 }
 

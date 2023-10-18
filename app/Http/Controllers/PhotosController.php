@@ -8,16 +8,6 @@ use Illuminate\Http\Request;
 
 class PhotosController extends Controller
 {
-    protected array $createRules = [
-        'img_path' => ['required','url'],
-        'aircraft' => ['required', 'min:3'],
-        'airline' => ['required'],
-        'license_plate' => ['required'],
-        'location' => ['required'],
-        'country' => ['required'],
-        'date' => ['required', 'date'],
-    ];
-
     public function gallery()
     {
         $photos = Photo::inRandomOrder()->get();

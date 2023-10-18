@@ -29,6 +29,12 @@ Route::get('/fotos/subir', [\App\Http\Controllers\PhotosController::class, 'uplo
 Route::post('/fotos/subir', [\App\Http\Controllers\PhotosController::class, 'uploadProcess'])
     ->middleware(['auth']);
 
+Route::get('/fotos/editar/{id}', [\App\Http\Controllers\PhotosController::class, 'editForm'])
+    ->middleware(['auth']);
+
+Route::post('/fotos/editar/{id}', [\App\Http\Controllers\PhotosController::class, 'editProcess'])
+    ->middleware(['auth']);
+
 Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
 
 Route::get('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadForm'])

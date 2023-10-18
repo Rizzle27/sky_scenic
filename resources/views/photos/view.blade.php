@@ -36,103 +36,112 @@
             </div>
         </section>
 
-        <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
-            <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este modelo
-                ({{ $photo->aircraft }})</h2>
-            <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
-                @foreach ($relatedModelPhotos as $photo)
-                    <div class="col-10 col-lg-3">
-                        <div class="rounded-3" style="background-color: #292929;">
-                            <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                <div style="height: 200px">
-                                    <img class="object-fit-cover rounded-top-3"
-                                        style="width: 100%; height: 100%; object-fit: cover;" src="{{ $photo->img_path }}"
-                                        alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
-                                        title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
-                                </div>
-
-                                <div class="d-flex flex-column justify-content-between card-body p-4">
-
-                                    <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
-                                        {{ Str::limit($photo->aircraft, 18, '...') }}
-                                    </h4>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                        <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+        @if (count($relatedModelPhotos) > 1)
+            <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
+                <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este modelo
+                    ({{ $photo->aircraft }})</h2>
+                <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
+                    @foreach ($relatedModelPhotos as $photo)
+                        <div class="col-10 col-lg-3">
+                            <div class="rounded-3" style="background-color: #292929;">
+                                <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
+                                    <div style="height: 200px">
+                                        <img class="object-fit-cover rounded-top-3"
+                                            style="width: 100%; height: 100%; object-fit: cover;"
+                                            src="{{ $photo->img_path }}"
+                                            alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
+                                            title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
                                     </div>
 
-                                </div>
-                            </a>
+                                    <div class="d-flex flex-column justify-content-between card-body p-4">
+
+                                        <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
+                                            {{ Str::limit($photo->aircraft, 18, '...') }}
+                                        </h4>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
+                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
-        <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
-            <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este autor
-                ({{ $photo->license_plate }})</h2>
-            <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
-                @foreach ($relatedRegisterPhotos as $photo)
-                    <div class="col-10 col-lg-3">
-                        <div class="rounded-3" style="background-color: #292929;">
-                            <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                <div style="height: 200px">
-                                    <img class="object-fit-cover rounded-top-3"
-                                        style="width: 100%; height: 100%; object-fit: cover;" src="{{ $photo->img_path }}"
-                                        alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
-                                        title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
-                                </div>
-
-                                <div class="d-flex flex-column justify-content-between card-body p-4">
-
-                                    <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
-                                        {{ Str::limit($photo->aircraft, 18, '...') }}
-                                    </h4>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                        <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+        @if (count($relatedRegisterPhotos) > 1)
+            <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
+                <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este vehículo
+                    ({{ $photo->license_plate }})</h2>
+                <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
+                    @foreach ($relatedRegisterPhotos as $photo)
+                        <div class="col-10 col-lg-3">
+                            <div class="rounded-3" style="background-color: #292929;">
+                                <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
+                                    <div style="height: 200px">
+                                        <img class="object-fit-cover rounded-top-3"
+                                            style="width: 100%; height: 100%; object-fit: cover;"
+                                            src="{{ $photo->img_path }}"
+                                            alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
+                                            title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
                                     </div>
 
-                                </div>
-                            </a>
+                                    <div class="d-flex flex-column justify-content-between card-body p-4">
+
+                                        <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
+                                            {{ Str::limit($photo->aircraft, 18, '...') }}
+                                        </h4>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
+                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
-        <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
-            <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este autor
-                ({{ $photo->author }})</h2>
-            <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
-                @foreach ($relatedAuthorPhotos as $photo)
-                    <div class="col-10 col-lg-3">
-                        <div class="rounded-3" style="background-color: #292929;">
-                            <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                <div style="height: 200px">
-                                    <img class="object-fit-cover rounded-top-3"
-                                        style="width: 100%; height: 100%; object-fit: cover;" src="{{ $photo->img_path }}"
-                                        alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
-                                        title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
-                                </div>
-
-                                <div class="d-flex flex-column justify-content-between card-body p-4">
-
-                                    <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
-                                        {{ Str::limit($photo->aircraft, 18, '...') }}
-                                    </h4>
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                        <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+        @if (count($relatedAuthorPhotos) > 1)
+            <section class="d-flex flex-column col-12 col-md-8 justify-content-center mx-auto py-3 px-2">
+                <h2 class="mb-3 fs-4 text-center text-md-start" style="color: #3E74FF;">Disfrutá más de este autor
+                    ({{ $photo->author }})</h2>
+                <div class="relatedCard d-flex flex-wrap justify-content-center gap-4 gap-md-2">
+                    @foreach ($relatedAuthorPhotos as $photo)
+                        <div class="col-10 col-lg-3">
+                            <div class="rounded-3" style="background-color: #292929;">
+                                <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
+                                    <div style="height: 200px">
+                                        <img class="object-fit-cover rounded-top-3"
+                                            style="width: 100%; height: 100%; object-fit: cover;"
+                                            src="{{ $photo->img_path }}"
+                                            alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
+                                            title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
                                     </div>
 
-                                </div>
-                            </a>
+                                    <div class="d-flex flex-column justify-content-between card-body p-4">
+
+                                        <h4 class="fs-6 fw-normal mb-3" style="color: #3E74FF;">
+                                            {{ Str::limit($photo->aircraft, 18, '...') }}
+                                        </h4>
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
+                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                        </div>
+
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </section>
+                    @endforeach
+                </div>
+            </section>
+        @endif
     </main>
 @endsection

@@ -8,8 +8,15 @@ use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
-    public function news() {
-        return view('news/news');
+    public function news()
+    {
+        $news = News::orderBy('created_at', 'desc')->get();
+
+        Debugbar::info($news);
+
+        return view('news/news', [
+            'news' => $news
+        ]);
     }
 
     public function uploadForm()
