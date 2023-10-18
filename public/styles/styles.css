@@ -36,6 +36,8 @@
     box-shadow: 3px 1px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+
+
 @keyframes slideInLeft {
     from {
         transform: translateX(-100%);
@@ -86,6 +88,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .cardContainer .photoCard {
+    position: relative;
     margin: 0 0 20px;
     overflow: hidden;
     break-inside: avoid;
@@ -143,6 +146,18 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .newsCardContainer {
         columns: 3;
     }
+}
+
+.optionsCard {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.showOptions {
+    display: flex !important;
 }
 
 /* Animaciones de librería */

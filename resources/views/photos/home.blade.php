@@ -86,6 +86,16 @@
             <div class="cardContainer w-100">
                 @foreach ($photos as $photo)
                     <div class="photoCard rounded-3 w-100" style="background-color: #292929;">
+                    <div class="optionsCard">
+                        <button onclick="showOptions(event)" style="background-color: rgba(0, 0, 0, 0.5);" class="border-0 rounded-pill">
+                            <img src="./images/icons/dots-options.svg" alt="abrir opciones">
+                        </button>
+                    </div>
+                    <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;" class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
+                        <li class="d-flex align-items-center"><button class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
+                        <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar foto</span></button></li>
+                        <li class="d-flex align-items-center"><button class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar foto</span></button></li>
+                    </ul>
                         <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
                             <img class="w-100" src="{{ $photo->img_path }}"
                                 alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
@@ -107,3 +117,9 @@
         </section>
     </main>
 @endsection
+
+<script>
+    const showOptions = (event) => {
+        event.target.parentNode.parentNode.nextElementSibling.classList.toggle( 'showOptions');
+    }
+</script>
