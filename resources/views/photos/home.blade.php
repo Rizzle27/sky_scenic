@@ -96,7 +96,7 @@
                                             src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar
                                             foto</span></button></li>
                             </ul>
-                            <a href="{{ url('/notcias/' . $new->id) }}" class="text-decoration-none text-light">
+                            <a href="{{ url('/noticias/' . $new->id) }}" class="text-decoration-none text-light">
                                 <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
                                     <h4 class="fs-5 fw-normal mb-0" style="color: #3E74FF;">
                                         {{ $new->title }}

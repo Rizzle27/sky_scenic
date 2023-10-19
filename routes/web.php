@@ -41,8 +41,10 @@ Route::get('/fotos/eliminar/{id}', [\App\Http\Controllers\PhotosController::clas
 Route::post('/fotos/eliminar/{id}', [\App\Http\Controllers\PhotosController::class, 'deleteProcess'])
     ->middleware(['auth']);
 
-
 Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
+
+Route::get('/noticias/{id}', [\App\Http\Controllers\NewsController::class, 'view'])
+    ->whereNumber('id');
 
 Route::get('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadForm'])
     ->middleware(['auth']);
@@ -51,6 +53,21 @@ Route::post('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'up
     ->middleware(['auth']);
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])
+    ->middleware(['auth', 'admin']);
+
+Route::get('/admin/noticias', [\App\Http\Controllers\AdminController::class, 'news'])
+    ->middleware(['auth', 'admin']);
+
+Route::get('/admin/noticias/editar/{id}', [\App\Http\Controllers\NewsController::class, 'editForm'])
+    ->middleware(['auth', 'admin']);
+
+Route::post('/admin/noticias/editar/{id}', [\App\Http\Controllers\NewsController::class, 'editProcess'])
+    ->middleware(['auth', 'admin']);
+
+Route::get('/admin/noticias/eliminar/{id}', [\App\Http\Controllers\NewsController::class, 'deleteForm'])
+    ->middleware(['auth', 'admin']);
+
+Route::post('/admin/noticias/eliminar/{id}', [\App\Http\Controllers\NewsController::class, 'deleteProcess'])
     ->middleware(['auth', 'admin']);
 
 Route::post('/iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
