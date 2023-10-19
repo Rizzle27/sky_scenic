@@ -35,6 +35,13 @@ Route::get('/fotos/editar/{id}', [\App\Http\Controllers\PhotosController::class,
 Route::post('/fotos/editar/{id}', [\App\Http\Controllers\PhotosController::class, 'editProcess'])
     ->middleware(['auth']);
 
+Route::get('/fotos/eliminar/{id}', [\App\Http\Controllers\PhotosController::class, 'deleteForm'])
+    ->middleware(['auth']);
+
+Route::post('/fotos/eliminar/{id}', [\App\Http\Controllers\PhotosController::class, 'deleteProcess'])
+    ->middleware(['auth']);
+
+
 Route::get('/noticias', [\App\Http\Controllers\NewsController::class, 'news']);
 
 Route::get('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadForm'])

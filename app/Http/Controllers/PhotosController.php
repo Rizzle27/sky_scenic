@@ -33,11 +33,11 @@ class PhotosController extends Controller
             ->where('id', '!=', $id)
             ->get();
         $relatedRegisterPhotos = Photo::where('license_plate', $photo->license_plate)
-        ->where('id', '!=', $id)
-        ->get();
+            ->where('id', '!=', $id)
+            ->get();
         $relatedAuthorPhotos = Photo::where('author', $photo->author)
-        ->where('id', '!=', $id)
-        ->get();
+            ->where('id', '!=', $id)
+            ->get();
 
         return view('photos/view', [
             'photo' => $photo,
@@ -64,5 +64,41 @@ class PhotosController extends Controller
         Photo::create($data);
 
         return redirect('/fotos/subir')->with('status.message', 'Foto subida con éxito');
+    }
+
+    public function editForm(int $id)
+    {
+        return view('photos.edit', [
+            'photo' => Photo::findOrFail($id),
+        ]);
+    }
+
+    public function editProcess(int $id, Request $request)
+    {
+        $photo = Photo::findOrFail($id);
+
+        $request->validate(Photo::CREATE_RULES, Photo::CREATE_MESSAGES);
+
+        $data = $request->only(['img_path', 'aircraft', 'airline', 'license_plate', 'location', 'country', 'date']);
+
+        $photo->update($data);
+
+        return redirect('/')->with('status.message', 'Foto editada con éxito');
+    }
+
+    public function deleteForm(int $id)
+    {
+        return view('photos.delete', [
+            'photo' => Photo::findOrFail($id)
+        ]);
+    }
+
+    public function deleteProcess(int $id)
+    {
+        $photo = Photo::findOrFail($id);
+
+        $photo->delete();
+
+        return redirect('/')->with('status.message', 'Foto eliminada con éxito');
     }
 }

@@ -25,6 +25,13 @@
 @section('content')
     <main class="d-flex flex-column py-5" style="background-color: #1E1E1E">
 
+        @if (session()->has('status') && isset(session('status')['message']))
+            <div id="status-message" class="position-absolute alert text-light"
+                style="background-color: #3E74FF; left: 40px; z-index: 200;">
+                {{ session('status')['message'] }}
+            </div>
+        @endif
+
         <section
             class="d-flex flex-column flex-lg-row justify-content-center mx-auto col-12 col-md-10 text-light px-2 px-md-0 py-5 gap-3">
 
@@ -85,7 +92,7 @@
                                         <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar
                                             foto</span></button></li>
                                 <li class="d-flex align-items-center"><button
-                                        class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img
+                                        class="d-flex align-items-center gap-2 bg-transparent border-0"><img
                                             src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar
                                             foto</span></button></li>
                             </ul>
@@ -119,14 +126,18 @@
                         </div>
                         <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;"
                             class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
-                            <li class="d-flex align-items-center"><button
-                                    class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
-                                    <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar
-                                        foto</span></button></li>
-                            <li class="d-flex align-items-center"><button
-                                    class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img
-                                        src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar
-                                        foto</span></button></li>
+                            <li class="d-flex align-items-center">
+                                <a href="{{ url('/fotos/editar/' . $photo->id) }}" class="text-decoration-none d-flex align-items-center gap-2 bg-transparent text-light border-0">
+                                    <img src="./images/icons/edit-pencil.svg" alt="editar foto">
+                                    <span>Editar foto</span>
+                                </a>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <a href="{{ url('/fotos/eliminar/' . $photo->id ) }}" class="text-decoration-none d-flex align-items-center gap-2 bg-transparent text-light border-0">
+                                    <img src="./images/icons/delete-trash.svg" alt="eliminar foto">
+                                    <span>Eliminar foto</span>
+                                </a>
+                            </li>
                         </ul>
                         <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
                             <img class="w-100" src="{{ $photo->img_path }}"
@@ -154,4 +165,11 @@
     const showOptions = (event) => {
         event.target.parentNode.parentNode.nextElementSibling.classList.toggle('showOptions');
     }
+
+    setTimeout(function() {
+        var statusMessage = document.getElementById('status-message');
+        if (statusMessage) {
+            statusMessage.style.display = 'none';
+        }
+    }, 5000);
 </script>

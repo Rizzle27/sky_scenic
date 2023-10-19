@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    Sky Scenic | {{ $photo->aircraft }} by {{ $photo->author }}
+@endsection
+
 @section('content')
     <main class="d-flex flex-column" style="background-color: #1E1E1E">
         <section class="d-flex flex-column col-12 justify-content-center mx-auto">
