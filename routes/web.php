@@ -73,5 +73,7 @@ Route::post('/admin/noticias/eliminar/{id}', [\App\Http\Controllers\NewsControll
 Route::post('/iniciar-sesion', [\App\Http\Controllers\AuthController::class, 'loginProcess'])
     ->name('auth.login.process');
 
+Route::post('/registrar-sesion', [\App\Http\Controllers\AuthController::class, 'signupProcess']);
+
 Route::post('/cerrar-sesion', [\App\Http\Controllers\AuthController::class, 'logoutProcess'])
     ->name('auth.logout.process');

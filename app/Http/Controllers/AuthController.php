@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,5 +27,18 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('index');
+    }
+
+    public function signupProcess(Request $request)
+    {
+        $data = $request->input();
+
+        $data = $request->only(['username', 'email', 'password']);
+
+        $user = User::create($data);
+
+        Auth::login($user);
+
+        return redirect('/')->with('status.message', 'Usuario creado con éxito');
     }
 }

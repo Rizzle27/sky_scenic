@@ -114,7 +114,8 @@
         </div>
 
         <div class="col-8">
-            <form action="" method="POST" class="d-flex flex-column gap-4 text-light">
+            <form action="{{ url('/registrar-sesion') }}" method="POST" class="d-flex flex-column gap-4 text-light">
+                @csrf
                 <div>
                     <label class="fs-5 mb-2" for="username">Nombre de usuario</label><br>
                     <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent"
