@@ -75,6 +75,31 @@
 
             <section id="news" class="d-none d-lg-flex flex-column col-12 col-lg-5">
                 <h2 class="fs-4 mb-2" style="color: #3E74FF;">Noticias relevantes</h2>
+                <div class="d-flex flex-column gap-2" style="max-height: 980px; overflow-y: scroll;">
+                    @foreach ($news as $new)
+                        <div class="rounded-3 w-100" style="background-color: #292929;">
+                            <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;"
+                                class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
+                                <li class="d-flex align-items-center"><button
+                                        class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
+                                        <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar
+                                            foto</span></button></li>
+                                <li class="d-flex align-items-center"><button
+                                        class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img
+                                            src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar
+                                            foto</span></button></li>
+                            </ul>
+                            <a href="{{ url('/notcias/' . $new->id) }}" class="text-decoration-none text-light">
+                                <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
+                                    <h4 class="fs-5 fw-normal mb-0" style="color: #3E74FF;">
+                                        {{ $new->title }}
+                                    </h4>
+                                    <h5 class="fs-6 fw-normal mb-0">{{ $new->subtitle }}</h5>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
             </section>
 
         </section>
@@ -86,16 +111,23 @@
             <div class="cardContainer w-100">
                 @foreach ($photos as $photo)
                     <div class="photoCard rounded-3 w-100" style="background-color: #292929;">
-                    <div class="optionsCard">
-                        <button onclick="showOptions(event)" style="background-color: rgba(0, 0, 0, 0.5);" class="border-0 rounded-pill">
-                            <img src="./images/icons/dots-options.svg" alt="abrir opciones">
-                        </button>
-                    </div>
-                    <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;" class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
-                        <li class="d-flex align-items-center"><button class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
-                        <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar foto</span></button></li>
-                        <li class="d-flex align-items-center"><button class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar foto</span></button></li>
-                    </ul>
+                        <div class="optionsCard">
+                            <button onclick="showOptions(event)" style="background-color: rgba(0, 0, 0, 0.5);"
+                                class="border-0 rounded-pill">
+                                <img src="./images/icons/dots-options.svg" alt="abrir opciones">
+                            </button>
+                        </div>
+                        <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;"
+                            class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
+                            <li class="d-flex align-items-center"><button
+                                    class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
+                                    <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar
+                                        foto</span></button></li>
+                            <li class="d-flex align-items-center"><button
+                                    class="d-flex align-items-center gap-2 bg-transparent text-light border-0"><img
+                                        src="./images/icons/delete-trash.svg" alt="eliminar foto"><span>Eliminar
+                                        foto</span></button></li>
+                        </ul>
                         <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
                             <img class="w-100" src="{{ $photo->img_path }}"
                                 alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
@@ -120,6 +152,6 @@
 
 <script>
     const showOptions = (event) => {
-        event.target.parentNode.parentNode.nextElementSibling.classList.toggle( 'showOptions');
+        event.target.parentNode.parentNode.nextElementSibling.classList.toggle('showOptions');
     }
 </script>

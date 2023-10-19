@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use App\Models\News;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,7 @@ class PhotosController extends Controller
         $photos = Photo::inRandomOrder()->get();
         $dailyPhoto = Photo::inRandomOrder()->first();
         $randomPhotos = Photo::inRandomOrder()->take(2)->get();
+        $news = News::orderBy('created_at', 'desc')->get();
 
         Debugbar::info($photos);
 
@@ -20,6 +22,7 @@ class PhotosController extends Controller
             'photos' => $photos,
             'dailyPhoto' => $dailyPhoto,
             'randomPhotos' => $randomPhotos,
+            'news' => $news,
         ]);
     }
 
