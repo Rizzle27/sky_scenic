@@ -12,11 +12,11 @@
 @section('intro')
     <section class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px">
         @auth
-            <h2 class="text-light text-center w-50" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido
+            <h2 class="text-light text-center w-50 fs-1 d-text-shadow">¡Bienvenido
                 de nuevo a Sky Scenic <span class="text-blueultra">{{ auth()->user()->username }}</span>!</h2>
         @endauth
         @guest
-            <h2 class="text-light text-center w-50" style="font-size: 4rem; text-shadow: 2px 2px 2px rgba(0,0,0,0.6);">¡Bienvenido
+            <h2 class="text-light text-center w-50 fs-1 d-text-shadow">¡Bienvenido
                 a Sky Scenic!</h2>
         @endguest
     </section>
@@ -26,8 +26,8 @@
     <main class="d-flex flex-column py-5" style="background-color: #1E1E1E">
 
         @if (session()->has('status') && isset(session('status')['message']))
-            <div id="status-message" class="position-absolute alert text-light"
-                style="background-color: #3E74FF; left: 40px; z-index: 200;">
+            <div id="status-message" class="position-absolute alert text-light bg-blueultra"
+                style="left: 40px; z-index: 200;">
                 {{ session('status')['message'] }}
             </div>
         @endif
@@ -39,7 +39,7 @@
 
                 <div>
                     <h2 class="fs-4 mb-2" class="text-blueultra">Fotos del día</h2>
-                    <div class="mainDailyPhotosCard rounded-3" style="background-color: #292929;">
+                    <div class="mainDailyPhotosCard rounded-3 bg-darkgray">
                         <a href="{{ url('/fotos/' . $dailyPhoto->id) }}" class="text-decoration-none text-light">
                             <img class="w-100 object-fit-cover rounded-top-3" src="{{ asset('images/photos/copy/'. $dailyPhoto->img_path_copyright) }}"
                                 alt="" style="max-height: 400px">
@@ -59,8 +59,8 @@
 
                 <div class="cardContainer d-flex w-100">
                     @foreach ($randomPhotos as $photo)
-                        <div class="d-flex secondaryDailyPhotosCard rounded-3"
-                            style="background-color: #292929; overflow: hidden;">
+                        <div class="d-flex secondaryDailyPhotosCard rounded-3 bg-darkgray"
+                            style="overflow: hidden;">
                             <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
                                 <img class="w-100 object-fit-cover" src="{{ asset('images/photos/copy/'. $photo->img_path_copyright) }}"
                                     alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
@@ -84,9 +84,8 @@
                 <h2 class="fs-4 mb-2" class="text-blueultra">Noticias relevantes</h2>
                 <div class="d-flex flex-column gap-2" style="max-height: 980px; overflow-y: scroll;">
                     @foreach ($news as $new)
-                        <div class="rounded-3 w-100" style="background-color: #292929;">
-                            <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;"
-                                class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
+                        <div class="rounded-3 w-100 bg-darkgray">
+                            <ul style="display: none; list-style: none; top: 25px; right: 25px;" class="list-group gap-4 p-3 rounded-2 px-4 position-absolute bg-darkgray">
                                 <li class="d-flex align-items-center"><button
                                         class="d-flex align-items-center gap-2 bg-transparent text-light border-0">
                                         <img src="./images/icons/edit-pencil.svg" alt="editar foto"><span>Editar
@@ -117,15 +116,15 @@
             <h2 class="fs-4 m-0" class="text-blueultra">Disfrutá de la galería completa</h2>
             <div class="cardContainer w-100">
                 @foreach ($photos as $photo)
-                    <div class="photoCard rounded-3 w-100" style="background-color: #292929;">
+                    <div class="photoCard rounded-3 w-100 bg-darkgray">
                         <div class="optionsCard">
                             <button onclick="showOptions(event)" style="background-color: rgba(0, 0, 0, 0.5);"
                                 class="border-0 rounded-pill">
                                 <img src="./images/icons/dots-options.svg" alt="abrir opciones">
                             </button>
                         </div>
-                        <ul style="display: none; list-style: none; background-color: #292929; top: 25px; right: 25px;"
-                            class="list-group gap-4 p-3 rounded-2 px-4 position-absolute">
+                        <ul style="display: none; list-style: none; top: 25px; right: 25px;"
+                            class="list-group gap-4 p-3 rounded-2 px-4 position-absolute bg-darkgray">
                             <li class="d-flex align-items-center">
                                 <a href="{{ url('/fotos/editar/' . $photo->id) }}" class="text-decoration-none d-flex align-items-center gap-2 bg-transparent text-light border-0">
                                     <img src="./images/icons/edit-pencil.svg" alt="editar foto">

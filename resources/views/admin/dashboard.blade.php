@@ -6,7 +6,7 @@ Sky Scenic | Admin Dashboard
 
 @section('intro')
 <section class="d-flex flex-column justify-content-center align-items-center py-5" style="min-height: 300px">
-    <h2 class="text-center text-light d-text-shadow" style="font-size: 4rem">Panel de Administración</h2>
+    <h2 class="text-center text-light d-text-shadow fs-1">Panel de Administración</h2>
     <p class="text-light fs-5 d-text-shadow">Dashboard del administrador <span class="text-blueultra">{{ auth()->user()->username }}</span></p>
 </section>
 <section class="d-flex flex-column text-center my-5" style="min-height: 380px">

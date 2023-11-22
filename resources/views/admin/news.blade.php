@@ -9,7 +9,7 @@ Sky Scenic | Noticias Admin
 
 @section('intro')
 <section class="d-flex justify-content-center align-items-center py-5" style="min-height: 600px">
-    <h2 class="text-light text-center d-text-shadow" style="font-size: 4rem;">Novedades y
+    <h2 class="text-light text-center d-text-shadow fs-1">Novedades y
         Noticias Recientes | <span class="text-blueultra">Admin</span></h2>
 </section>
 @endsection
