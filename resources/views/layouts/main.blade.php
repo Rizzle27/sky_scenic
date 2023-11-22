@@ -39,7 +39,7 @@
     @endif
 
     <section id="login-section"
-        class="flex-column align-items-center justify-content-center position-fixed col-8 col-md-6 col-lg-5 gap-5">
+        class="flex-column align-items-center justify-content-center position-fixed col-12 col-md-6 col-lg-5 gap-5">
         <div id="login-section_content" class="d-flex flex-column justify-content-around align-items-center">
             <div class="col-8">
                 <div class="d-flex justify-content-between align-items-center">
@@ -100,12 +100,10 @@
             </div>
             @endguest
         </div>
-
-
     </section>
 
     <section id="register-section"
-        class="flex-column align-items-center justify-content-center position-fixed col-8 col-md-6 col-lg-5 gap-5">
+        class="flex-column align-items-center justify-content-center position-fixed col-12 col-md-6 col-lg-5 gap-5">
         <div id="register-section_content" class="d-flex flex-column justify-content-around align-items-center">
             <div class="col-8">
                 <div class="d-flex justify-content-between align-items-center">
@@ -149,9 +147,9 @@
 
 
     <section id="nav-container" @if ($background==null) class="bg-darkgray" @endif>
-        <nav class="navbar navbar-expand-lg bg-transparent">
-            <div class="container-fluid">
-                <h1 class="rafginsFont fs-3 m-0"><a href={{ url('/') }} class="text-light text-decoration-none">Sky<span
+        <nav class="bg-dark bg-lg-transparent navbar navbar-expand-lg">
+            <div class="col-10 py-1 py-lg-3 container-fluid">
+                <h1 class="rafginsFont fs-3 m-0" style="z-index: 200;"><a href={{ url('/') }} class="text-light text-decoration-none">Sky<span
                             class="text-blueultra">Scenic</span></a>
                 </h1>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -159,7 +157,7 @@
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="d-flex justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="d-flex align-items-center justify-content-end navbar-nav mb-2 mb-lg-0 gap-4">
                         <li class="nav-item">
                             <a href={{ url('/') }}
@@ -201,55 +199,6 @@
                         @endauth
                     </ul>
                 </div>
-            </div>
-        </nav>
-        @yield('intro')
-    </section>
-
-
-    <section id="nav-container" @if ($background==null) class="bg-darkgray" @endif>
-        <nav class="mx-auto d-flex justify-content-between col-10 align-items-center py-4">
-            <div style="z-index: 200;">
-                <h1 class="rafginsFont fs-3 m-0"><a href={{ url('/') }} class="text-light text-decoration-none">Sky<span
-                            class="text-blueultra">Scenic</span></a>
-                </h1>
-            </div>
-            <div>
-                <ul class="d-flex align-items-center gap-4 m-0 list-unstyled">
-                    <li><a href={{ url('/') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Galería</a></li>
-                    <li><a href={{ url('/noticias') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Noticias</a></li>
-                    <li><a href={{ url('/suscripcion') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Suscribite</a></li>
-
-                    @guest
-                    <li><button
-                            class="register-link hvr-rectangle-in px-2 py-1 rounded-pill text-light text-decoration-none border-blueultra">Registrarse</button>
-                    </li>
-
-                    <li><button
-                            class="login-link hvr-rectangle-out px-2 py-1 rounded-pill text-light text-decoration-none bg-transparent border-blueultra">Iniciar
-                            Sesión</button></li>
-                    @endguest
-                    @auth
-                    <li><a href={{ url('/fotos/subir') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Subir Foto</a></li>
-
-                    @if (auth()->user()->role == 'admin')
-                    <li><a href={{ url('/noticias/subir') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Subir Noticia</a></li>
-
-                    <li><a href={{ url('/admin') }}
-                            class="hvr-underline-from-left text-light text-decoration-none">Admin</a></li>
-                    @endif
-
-                    <li><button
-                            class="login-link hvr-rectangle-out px-2 py-1 rounded-pill text-light text-decoration-none bg-transparent border-blueultra">{{
-                            auth()->user()->username }}</button></li>
-                    @endauth
-
-                </ul>
             </div>
         </nav>
         @yield('intro')
