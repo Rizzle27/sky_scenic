@@ -28,62 +28,80 @@ use Illuminate\Support\ViewErrorBag;
         @endif
 
         <section id="createForm" class="d-flex flex-column col-12 justify-content-center mx-auto gap-4 pb-4">
-            <form class="d-flex flex-column text-light" action="{{ url('/fotos/subir') }}" method="POST">
+            <h2 class="text-light col-8 mx-auto">Subir Una Nueva Foto</h2>
+            <form class="d-flex flex-column text-light" action="{{ url('/fotos/subir') }}" method="POST"
+                enctype="multipart/form-data">
                 @csrf
-                <div class="d-flex justify-content-center mx-auto w-100" style="background-color: #000; min-height: 520px;">
-                    <div class="position-absolute w-50 d-flex flex-column justify-center mx-auto">
-                        <input class="text-dark rounded-pill py-2 px-3 bg-transparent"
-                            style="border: 2px solid #3E74FF; margin-top: 2rem; background-color: #ffffff !important; box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);"
-                            type="text" id="img_path" name="img_path" placeholder="Insertá acá la URL de tu foto" value="{{ old('img_path') }}">
+
+                <div class="d-flex flex-column flex-lg-row justify-content-between py-3 col-8 mx-auto">
+                    <div class="d-flex flex-column col-12 col-lg-5">
+                        <input type="file" class="form-control" name="img_path_copyright" onchange="loadFileCopy(event)"/>
+
+                        <p class="py-2">Subí tu foto con marca de agua</p>
+
+                        <img id="img_path_copyright_output" class="w-100 pb-3">
+
+                        @error('img_path_copyright')
+                            <p class="text-danger text-center">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="d-flex flex-column col-12 col-lg-5">
+                        <input type="file" class="form-control" name="img_path" onchange="loadFile(event)"/>
+
+                        <p class="py-2">Subí tu foto sin marca de agua</p>
+
+                        <img id="img_path_output" class="w-100 pb-3">
+
                         @error('img_path')
                             <p class="text-danger text-center">{{ $message }}</p>
                         @enderror
                     </div>
-                    <img class="object-fit-cover col-8" id="img_path_value" src="{{ old('img_path') }}" alt="">
                 </div>
 
-                <div id="features" class="d-flex flex-row col-8 mx-auto">
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="aircraft" style="color: #3E74FF;">Aeronave</label>
+                <p class="col-8 mx-auto pb-2">Tengase en cuenta que si se sube una foto sin marca de agua el sitio no es responsable por la descarga indebida de las mismas.</p>
+
+                <div id="features" class="d-flex flex-column flex-lg-row col-8 mx-auto">
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="aircraft" class="text-blueultra">Aeronave</label>
                         <textarea class="text-light bg-transparent" rows="2" id="aircraft" name="aircraft"
                             placeholder="Nombre de la aeronave">{{ old('aircraft') }}</textarea>
                         @error('aircraft')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="license_plate" style="color: #3E74FF;">Mtrícula</label>
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="license_plate" class="text-blueultra">Mtrícula</label>
                         <textarea class="text-light bg-transparent" rows="2" id="license_plate" name="license_plate"
                             placeholder="Matrícula de la aeronave">{{ old('license_plate') }}</textarea>
                         @error('license_plate')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="airline" style="color: #3E74FF;">Aerolínea</label>
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="airline" class="text-blueultra">Aerolínea</label>
                         <textarea class="text-light bg-transparent" rows="2" id="airline" name="airline"
                             placeholder="Nombre de la aerolínea de la aeronave">{{ old('airline') }}</textarea>
                         @error('airline')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="location" style="color: #3E74FF;">Locación</label>
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="location" class="text-blueultra">Locación</label>
                         <textarea class="text-light bg-transparent" rows="2" id="location" name="location"
                             placeholder="Ubicación de la foto">{{ old('location') }}</textarea>
                         @error('location')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="country" style="color: #3E74FF;">País</label>
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="country" class="text-blueultra">País</label>
                         <textarea class="text-light bg-transparent" rows="2" id="country" name="country" placeholder="País de la foto">{{ old('country') }}</textarea>
                         @error('country')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div class="featureSection d-flex flex-column col-2">
-                        <label for="date" style="color: #3E74FF;">Fecha</label>
+                    <div class="featureSection d-flex flex-column col-12 col-lg-2">
+                        <label for="date" class="text-blueultra">Fecha</label>
                         <input class="text-light bg-transparent" type="date" id="date" name="date"
                             placeholder="Fecha de la foto" value="{{ old('date') }}">
                         @error('date')
@@ -93,21 +111,29 @@ use Illuminate\Support\ViewErrorBag;
                     <input type="text" id="author" name="author" value="{{ auth()->user()->username }}" hidden>
                 </div>
 
-                <button class="hvr-shutter-out-horizontal fs-5 my-3 text-light rounded-pill py-1 px-3 w-50 mx-auto my-5" style="border: 2px solid #3E74FF;" type="submit">Subir</button>
+                <button class="hvr-shutter-out-horizontal fs-5 my-3 text-light rounded-pill py-1 px-3 w-50 mx-auto my-5"
+                    style="border: 2px solid #3E74FF;" type="submit">Subir</button>
             </form>
         </section>
     </main>
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const imgInput = document.getElementById('img_path');
-        const imgOutput = document.getElementById('img_path_value');
+    var loadFile = function(event) {
+        var output = document.getElementById('img_path_output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src)
+        }
+    };
 
-        imgInput.addEventListener('input', function() {
-            imgOutput.src = imgInput.value;
-        });
-    });
+    var loadFileCopy = function(event) {
+        var output = document.getElementById('img_path_copyright_output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src)
+        }
+    };
 
     setTimeout(function() {
         var statusMessage = document.getElementById('status-message');

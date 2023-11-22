@@ -12,7 +12,7 @@ use Illuminate\Support\ViewErrorBag;
 @endsection
 
 @section('content')
-    <main class="d-flex" style="background-color: #292929">
+    <main class="d-flex bg-darkgray">
 
         @if (session()->has('status') && isset(session('status')['message']))
             <div id="status-message" class="position-absolute alert text-light"
@@ -28,7 +28,7 @@ use Illuminate\Support\ViewErrorBag;
         @endif
 
         <section id="createForm" class="d-flex flex-column col-10 justify-content-center mx-auto py-5">
-            <form class="d-flex flex-column text-light gap-4" action="{{ url('/noticias/subir') }}" method="POST">
+            <form class="d-flex flex-column text-light gap-4" action="{{ url('/noticias/subir') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <h2 class="fs-4">Noticias</h2>
                 <div class="d-flex flex-column gap-4">
@@ -42,36 +42,28 @@ use Illuminate\Support\ViewErrorBag;
                     <div class="d-flex flex-column">
                         <textarea class="fs-5 text-light bg-transparent p-1" id="subtitle" name="subtitle"
                             placeholder="Subtítulo de la noticia">{{ old('subtitle') }}</textarea>
-                            @error('subtitle')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
+                        @error('subtitle')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
-                    <div>
-                        <input class="fs-5 text-light bg-transparent p-1" type="date" id="date" name="date"
-                            placeholder="Fecha de la noticia" style="border: 0" value="{{ old('date') }}">
-                            @error('date')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
-                    </div>
+                    <div class="d-flex flex-column col-lg-6">
+                        <input type="file" class="form-control" name="img_path" onchange="loadFile(event)"/>
 
-                    <div class="d-flex justify-content-center" style="background-color: #000; min-height: 200px;">
-                        <div class="position-absolute w-50 d-flex flex-column justify-center mx-auto">
-                            <input class="text-dark rounded-pill py-2 px-3 bg-transparent"
-                                style="border: 2px solid #3E74FF; margin-top: 2rem; background-color: #ffffff !important; box-shadow: 4px 3px 5px 0px rgba(0,0,0,0.75);"
-                                type="text" id="img_path" name="img_path" placeholder="Insertá acá la URL de tu foto" value="{{ old('img_path') }}">
-                            @error('img_path')
-                                <p class="text-danger text-center">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <img class="object-fit-cover w-100" id="img_path_value" src="{{ old('img_path') }}" alt="">
+                        <p class="py-2">Subí la foto de la noticia</p>
+
+                        <img id="img_path_output" class="w-100 pb-3">
+
+                        @error('img_path')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="d-flex flex-column">
                         <textarea class="fs-5 text-light bg-transparent p-1" rows="10" id="body" name="body"
                             placeholder="Cuerpo de la noticia">{{ old('body') }}</textarea>
-                            @error('body')
-                                <p class="text-danger">{{ $message }}</p>
-                            @enderror
+                        @error('body')
+                            <p class="text-danger">{{ $message }}</p>
+                        @enderror
                     </div>
                     <input type="text" name="author" id="author" value="{{ auth()->user()->username }}" hidden>
                 </div>
@@ -84,14 +76,13 @@ use Illuminate\Support\ViewErrorBag;
 @endsection
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const imgInput = document.getElementById('img_path');
-        const imgOutput = document.getElementById('img_path_value');
-
-        imgInput.addEventListener('input', function() {
-            imgOutput.src = imgInput.value;
-        });
-    });
+    var loadFile = function(event) {
+        var output = document.getElementById('img_path_output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+            URL.revokeObjectURL(output.src)
+        }
+    };
 
     setTimeout(function() {
         var statusMessage = document.getElementById('status-message');

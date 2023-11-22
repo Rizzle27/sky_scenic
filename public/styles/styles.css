@@ -1,3 +1,41 @@
+/* Estilos generales */
+
+.text-blueultra {
+    color: #3e74ff;
+}
+
+.bg-blueultra {
+    background-color: #3e74ff;
+}
+
+.bg-warnred {
+    background-color: #ff3e3e;
+}
+
+.bg-darkgray {
+    background-color: #292929;
+}
+
+.bg-darkblack {
+    background-color: #1E1E1E;
+}
+
+.border-blueultra {
+    border: 2px solid #3e74ff;
+}
+
+.border-warnred {
+    border: 2px solid #ff3e3e;
+}
+
+.d-text-shadow {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+}
+
+.d-box-shadow {
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -36,7 +74,26 @@
     box-shadow: 3px 1px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
+#login-close,
+#register-close {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #3e74ff !important;
+}
 
+#login-section_content,
+#register-section_content {
+    height: 70%;
+    width: 100%;
+}
+
+#subscription-box {
+    border: 1px solid #3e74ff;
+}
+
+#subscription-container {
+    height: 80vh;
+}
 
 @keyframes slideInLeft {
     from {
@@ -72,7 +129,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex: 1;
     padding: 1rem 1rem;
     border: 1px solid #313131;
-    border-top: 0;
 }
 
 .featureSection input {
@@ -106,6 +162,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .secondaryDailyPhotosCard {
     flex: 1;
+}
+
+#createForm {
+    min-height: 82vh !important;
 }
 
 @media screen and (max-width: 576px) {

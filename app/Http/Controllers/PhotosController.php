@@ -54,17 +54,39 @@ class PhotosController extends Controller
 
     public function uploadProcess(Request $request)
     {
-        $data = $request->input();
+        $request->validate([
+            'img_path' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'img_path_copyright' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'aircraft' => 'required',
+            'airline' => 'required',
+            'license_plate' => 'required',
+            'location' => 'required',
+            'country' => 'required',
+            'date' => 'required',
+        ]);
 
-        $data = $request->only(['img_path', 'aircraft', 'airline', 'license_plate', 'location', 'country', 'date']);
+        if ($request->hasFile('img_path')) {
+            $imageFile = $request->file('img_path');
+            $imageName = time() . '.' . $imageFile->extension();
+            $imageFile->move(public_path('images/photos'), $imageName);
+        }
+
+        if ($request->hasFile('img_path_copyright')) {
+            $copyrightFile = $request->file('img_path_copyright');
+            $copyrightName = time() . '_copy.' . $copyrightFile->extension();
+            $copyrightFile->move(public_path('images/photos/copy'), $copyrightName);
+        }
+
+        $data = $request->only(['aircraft', 'airline', 'license_plate', 'location', 'country', 'date']);
+        $data['img_path'] = $imageName ?? null;
+        $data['img_path_copyright'] = $copyrightName ?? null;
         $data['author'] = auth()->user()->username;
-
-        $request->validate(Photo::CREATE_RULES, Photo::CREATE_MESSAGES);
 
         Photo::create($data);
 
         return redirect('/fotos/subir')->with('status.message', 'Foto subida con éxito');
     }
+
 
     public function editForm(int $id)
     {
@@ -77,9 +99,32 @@ class PhotosController extends Controller
     {
         $photo = Photo::findOrFail($id);
 
-        $request->validate(Photo::CREATE_RULES, Photo::CREATE_MESSAGES);
+        $request->validate([
+            'img_path' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'img_path_copyright' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'aircraft' => 'required',
+            'airline' => 'required',
+            'license_plate' => 'required',
+            'location' => 'required',
+            'country' => 'required',
+            'date' => 'required',
+        ]);
 
-        $data = $request->only(['img_path', 'aircraft', 'airline', 'license_plate', 'location', 'country', 'date']);
+        if ($request->hasFile('img_path')) {
+            $imageFile = $request->file('img_path');
+            $imageName = time() . '.' . $imageFile->extension();
+            $imageFile->move(public_path('images/photos'), $imageName);
+        }
+
+        if ($request->hasFile('img_path_copyright')) {
+            $copyrightFile = $request->file('img_path_copyright');
+            $copyrightName = time() . '_copy.' . $copyrightFile->extension();
+            $copyrightFile->move(public_path('images/photos/copy'), $copyrightName);
+        }
+
+        $data = $request->only(['aircraft', 'airline', 'license_plate', 'location', 'country', 'date']);
+        $data['img_path'] = $imageName ?? null;
+        $data['img_path_copyright'] = $copyrightName ?? null;
 
         $photo->update($data);
 

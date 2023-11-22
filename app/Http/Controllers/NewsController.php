@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\News;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -26,12 +27,23 @@ class NewsController extends Controller
 
     public function uploadProcess(Request $request)
     {
-        $data = $request->input();
+        $request->validate([
+            'title' => 'required',
+            'subtitle' => 'required',
+            'img_path' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'body' => 'required',
+        ]);
 
-        $data = $request->only(['title', 'subtitle', 'date', 'img_path', 'body']);
+        if ($request->hasFile('img_path')) {
+            $imageFile = $request->file('img_path');
+            $imageName = time() . '.' . $imageFile->extension();
+            $imageFile->move(public_path('images/news'), $imageName);
+        }
+
+        $data = $request->only(['title', 'subtitle', 'body']);
+        $data['img_path'] = $imageName ?? null;
         $data['author'] = auth()->user()->username;
-
-        $request->validate(News::CREATE_RULES, News::CREATE_MESSAGES);
+        $data['date'] = Carbon::now()->toDateString();
 
         News::create($data);
 
@@ -58,9 +70,22 @@ class NewsController extends Controller
     {
         $new = News::findOrFail($id);
 
-        $request->validate(News::CREATE_RULES, News::CREATE_MESSAGES);
+        $request->validate([
+            'title' => 'required',
+            'subtitle' => 'required',
+            'img_path' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'body' => 'required',
+        ]);
+
+        if ($request->hasFile('img_path')) {
+            $imageFile = $request->file('img_path');
+            $imageName = time() . '.' . $imageFile->extension();
+            $imageFile->move(public_path('images/news'), $imageName);
+        }
 
         $data = $request->only(['img_path', 'title', 'subtitle', 'date', 'author', 'country', 'body']);
+        $data['img_path'] = $imageName ?? null;
+        $data['author'] = auth()->user()->username;
 
         $new->update($data);
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('location');
             $table->string('country');
             $table->string('img_path');
+            $table->string('img_path_copyright');
             $table->string('author');
             $table->date('date');
             $table->timestamps();

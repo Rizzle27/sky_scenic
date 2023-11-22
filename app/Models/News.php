@@ -14,8 +14,7 @@ class News extends Model
     public const CREATE_RULES = [
         'title' => ['required', 'min:10'],
         'subtitle' => ['required', 'min:10'],
-        'date' => ['required'],
-        'img_path' => ['required', 'url'],
+        'img_path' => ['required'],
         'body' => ['required', 'min:30'],
     ];
 
@@ -24,8 +23,6 @@ class News extends Model
         'title.required' => 'El título no puede estar vacío.',
         'subtitle.min' => 'El subtítulo debe contener al menos :min caracteres..',
         'subtitle.required' => 'El subtítulo no puede estar vacío.',
-        'date.required' => 'La fecha no puede estar vacía.',
-        'img_path.url' => 'La foto tiene que ser una URL.',
         'img_path.required' => 'La foto no puede estar vacía.',
         'body.min' => 'El cuerpo debe contener al menos :min caracteres.',
         'body.required' => 'El cuerpo no puede estar vacío.',
