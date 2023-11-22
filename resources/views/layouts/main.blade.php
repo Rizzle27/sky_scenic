@@ -152,10 +152,10 @@
                 <h1 class="rafginsFont fs-3 m-0" style="z-index: 200;"><a href={{ url('/') }} class="text-light text-decoration-none">Sky<span
                             class="text-blueultra">Scenic</span></a>
                 </h1>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler border-0" style="box-shadow: none;" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon" style="filter: invert(100%);"></span>
                 </button>
                 <div class="justify-content-end collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="d-flex align-items-center justify-content-end navbar-nav mb-2 mb-lg-0 gap-4">
