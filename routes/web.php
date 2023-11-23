@@ -52,7 +52,11 @@ Route::get('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'upl
 Route::post('/noticias/subir', [\App\Http\Controllers\NewsController::class, 'uploadProcess'])
     ->middleware(['auth']);
 
-Route::get('/suscripcion', [\App\Http\Controllers\SubscriptionsController::class, 'subscription']);
+Route::get('/suscripcion', [\App\Http\Controllers\SubscriptionController::class, 'subscription'])
+    ->middleware(['auth']);
+
+Route::post('/suscripcion', [\App\Http\Controllers\SubscriptionController::class, 'subscribe'])
+    ->middleware(['auth']);
 
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])
     ->middleware(['auth', 'admin']);
