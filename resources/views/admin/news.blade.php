@@ -9,15 +9,15 @@ Sky Scenic | Noticias Admin
 
 @section('intro')
 <section class="d-flex justify-content-center align-items-center py-5" style="min-height: 600px">
-    <h2 class="text-light text-center d-text-shadow fs-1">Novedades y
-        Noticias Recientes | <span class="text-blueultra">Admin</span></h2>
+    <h1 class="text-light text-center d-text-shadow fs-1">Novedades y
+        Noticias Recientes | <span>Admin</span></h1>
 </section>
 @endsection
 
 @section('content')
 <main class="d-flex flex-column py-5 bg-darkblack">
     @if (session()->has('status') && isset(session('status')['message']))
-    <div id="status-message" class="position-absolute alert text-light bg-blueultra" style="left: 40px; z-index: 200;">
+    <div id="status-message" class="position-absolute alert text-light bg-blueultra status-message-position">
         {{ session('status')['message'] }}
     </div>
     @endif
@@ -49,12 +49,3 @@ Sky Scenic | Noticias Admin
     </section>
 </main>
 @endsection
-
-<script>
-    setTimeout(function() {
-        var statusMessage = document.getElementById('status-message');
-        if (statusMessage) {
-            statusMessage.style.display = 'none';
-        }
-    }, 5000);
-</script>

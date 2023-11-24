@@ -16,18 +16,38 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'username' => 'Rizzle27',
+                'username' => 'Lucas',
                 'email' => 'lucas.garcia@davinci.edu.ar',
                 'password' => Hash::make('1234'),
                 'role' => 'admin',
+                'subscribed' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'username' => 'Kun',
-                'email' => 'kun.aguero@davinci.edu.ar',
+                'username' => 'Nico',
+                'email' => 'nicolas.aguero@davinci.edu.ar',
+                'password' => Hash::make('1234'),
+                'role' => 'admin',
+                'subscribed' => false,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'username' => 'Belén',
+                'email' => 'belen.stella@davinci.edu.ar',
                 'password' => Hash::make('1234'),
                 'role' => 'regular',
+                'subscribed' => false,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'username' => 'Martina',
+                'email' => 'martina.bianchi@davinci.edu.ar',
+                'password' => Hash::make('1234'),
+                'role' => 'regular',
+                'subscribed' => true,
                 'created_at' => now(),
                 'updated_at' => now()
             ],

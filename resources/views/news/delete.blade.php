@@ -9,11 +9,11 @@ Sky Scenic | {{ $new->title }} by {{ $new->author }}
 
     <section id="createForm" class="d-flex flex-column col-10 justify-content-center mx-auto py-5 text-light">
         <div class="d-flex justify-content-between">
-            <h2 class="fs-5">Noticias</h2>
+            <h1 class="fs-5">Noticias</h1>
             <p class="fs-5">{{ $new->date }}</p>
         </div>
         <div class="d-flex flex-column gap-4">
-            <h1 class="fs-3" class="text-blueultra">{{ $new->title }}</h1>
+            <h2 class="fs-2 text-blueultra">{{ $new->title }}</h2>
             <h2 class="fs-4">{{ $new->subtitle }}</h2>
             <b class="fs-5">Por: {{ $new->author }}</b>
             <img src="{{ $new->img_path }}" alt="{{ $new->title }} - {{ $new->subtitule }}">

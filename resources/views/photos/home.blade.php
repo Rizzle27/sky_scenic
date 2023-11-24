@@ -23,11 +23,10 @@
 @endsection
 
 @section('content')
-    <main class="d-flex flex-column py-5" style="background-color: #1E1E1E">
+    <main class="d-flex flex-column py-5 bg-darkblack">
 
         @if (session()->has('status') && isset(session('status')['message']))
-            <div id="status-message" class="position-absolute alert text-light bg-blueultra"
-                style="left: 40px; z-index: 200;">
+            <div id="status-message" class="position-absolute alert text-light bg-blueultra status-message-position">
                 {{ session('status')['message'] }}
             </div>
         @endif
@@ -38,14 +37,14 @@
             <section id="dailyPhotos" class="d-flex flex-column col-12 col-lg-7 gap-3">
 
                 <div>
-                    <h2 class="fs-4 mb-2" class="text-blueultra">Fotos del día</h2>
+                    <h2 class="fs-4 mb-2 text-blueultra">Fotos del día</h2>
                     <div class="mainDailyPhotosCard rounded-3 bg-darkgray">
                         <a href="{{ url('/fotos/' . $dailyPhoto->id) }}" class="text-decoration-none text-light">
                             <img class="w-100 object-fit-cover rounded-top-3" src="{{ asset('images/photos/copy/'. $dailyPhoto->img_path_copyright) }}"
                                 alt="" style="max-height: 400px">
                             <div class="p-4">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <h3 class="fs-4" class="text-blueultra">{{ $dailyPhoto->aircraft }}</h3>
+                                    <h3 class="fs-4 text-blueultra">{{ $dailyPhoto->aircraft }}</h3>
                                     <h4 class="fs-5">{{ $dailyPhoto->license_plate }}</h4>
                                 </div>
                                 <div class="mt-3">
@@ -66,7 +65,7 @@
                                     alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
                                     title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
                                 <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
-                                    <h3 class="fs-6 fw-normal mb-0" class="text-blueultra">
+                                    <h3 class="fs-6 fw-normal mb-0 text-blueultra">
                                         {{ Str::limit($photo->aircraft, 22, '...') }}
                                     </h3>
                                     <div class="d-flex w-100 justify-content-between">
@@ -81,7 +80,7 @@
             </section>
 
             <section id="news" class="d-none d-lg-flex flex-column col-12 col-lg-5">
-                <h2 class="fs-4 mb-2" class="text-blueultra">Noticias relevantes</h2>
+                <h2 class="fs-4 mb-2 text-blueultra">Noticias relevantes</h2>
                 <div class="d-flex flex-column gap-2" style="max-height: 980px; overflow-y: scroll;">
                     @foreach ($news as $new)
                         <div class="rounded-3 w-100 bg-darkgray">
@@ -97,7 +96,7 @@
                             </ul>
                             <a href="{{ url('/noticias/' . $new->id) }}" class="text-decoration-none text-light">
                                 <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
-                                    <h3 class="fs-5 fw-normal mb-0" class="text-blueultra">
+                                    <h3 class="fs-5 fw-normal mb-0 text-blueultra">
                                         {{ $new->title }}
                                     </h3>
                                     <h4 class="fs-6 fw-normal mb-0">{{ $new->subtitle }}</h4>
@@ -113,7 +112,7 @@
         <section
             class="d-flex flex-column justify-content-center mx-auto col-12 col-md-10 text-light px-2 px-md-0 py-5 gap-3">
 
-            <h2 class="fs-4 m-0" class="text-blueultra">Disfrutá de la galería completa</h2>
+            <h2 class="fs-4 m-0 text-blueultra">Disfrutá de la galería completa</h2>
             <div class="cardContainer w-100">
                 @foreach ($photos as $photo)
                     <div class="photoCard rounded-3 w-100 bg-darkgray">
@@ -143,7 +142,7 @@
                                 alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
                                 title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
                             <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
-                                <h4 class="fs-6 fw-normal mb-0" class="text-blueultra">
+                                <h4 class="fs-6 fw-normal mb-0 text-blueultra">
                                     {{ Str::limit($photo->aircraft, 22, '...') }}
                                 </h4>
                                 <div class="d-flex w-100 justify-content-between">
@@ -159,16 +158,3 @@
         </section>
     </main>
 @endsection
-
-<script>
-    const showOptions = (event) => {
-        event.target.parentNode.parentNode.nextElementSibling.classList.toggle('showOptions');
-    }
-
-    setTimeout(function() {
-        var statusMessage = document.getElementById('status-message');
-        if (statusMessage) {
-            statusMessage.style.display = 'none';
-        }
-    }, 5000);
-</script>

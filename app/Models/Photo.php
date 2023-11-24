@@ -29,4 +29,8 @@ class Photo extends Model
         'country.required' => 'El país de la foto no puede estar vacío.',
         'date.required' => 'La fecha de la foto no puede estar vacía.',
     ];
+
+    public function users() {
+        return $this->belongsTo(User::class, 'author');
+    }
 }

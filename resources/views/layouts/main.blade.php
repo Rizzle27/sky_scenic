@@ -70,24 +70,28 @@
                         class="d-flex flex-column gap-4 text-light">
                         @csrf
                         <div>
-                            <label class="fs-5 mb-2" for="username">Nombre de usuario</label><br>
-                            <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent border-blueultra"
-                                type="text" id="username" name="username" placeholder="Escriba su nombre de usuario">
+                            <label class="fs-5 mb-2 d-block" for="username" style="margin-bottom: 5px;">Nombre de
+                                usuario
+                                <input class="fs-6 text-light w-100 rounded-pill py-2 my-2 px-3 bg-transparent border-blueultra"
+                                    type="text" id="username" name="username"
+                                    placeholder="Escriba su nombre de usuario">
+                            </label>
                         </div>
                         <div>
-                            <label class="fs-5 mb-2" for="password">Contraseña</label><br>
-                            <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent border-blueultra"
-                                type="text" id="password" name="password" placeholder="Escriba su contraseña">
+                            <label class="fs-5 mb-2 d-block" for="password" style="margin-bottom: 5px;">Contraseña
+                                <input class="fs-6 text-light w-100 rounded-pill py-2 my-2 px-3 bg-transparent border-blueultra"
+                                    type="password" id="password" name="password" placeholder="Escriba su contraseña">
+                            </label>
                         </div>
                         <button
                             class="hvr-shutter-out-horizontal fs-5 my-3 text-light w-100 rounded-pill py-1 px-3 border-blueultra"
-                            type="submit">Iniciar
-                            Sesión</button>
+                            type="submit">Iniciar Sesión</button>
                     </form>
                 @endguest
 
                 @if (Session::has('loginError'))
-                    <div class="fs-6 my-3 text-center text-light w-100 rounded-pill py-1 px-3 border-warnred">
+                    <div class="fs-6 my-3 text-center text-light w-100 rounded-pill py-1 px-3 border-warnred"
+                        id="loginErrorContainer">
                         {{ Session::get('loginError') }}
                     </div>
                 @endif
@@ -114,28 +118,38 @@
             </div>
 
             <div class="col-8">
-                <form action="{{ url('/registrar-sesion') }}" method="POST"
-                    class="d-flex flex-column gap-4 text-light">
+                <form action="{{ url('/registrar-sesion') }}" method="POST" class="d-flex flex-column gap-4 text-light">
                     @csrf
                     <div>
-                        <label class="fs-5 mb-2" for="username">Nombre de usuario</label><br>
-                        <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent border-blueultra"
-                            type="text" id="username" name="username" placeholder="Escriba su nombre de usuario">
+                        <label class="fs-5 mb-2 d-block" for="username" style="margin-bottom: 5px;">Nombre de usuario
+                            <input class="fs-6 text-light w-100 rounded-pill py-2 my-2 px-3 bg-transparent border-blueultra" type="text"
+                                id="username" name="username" placeholder="Escriba su nombre de usuario">
+                        </label>
                     </div>
                     <div>
-                        <label class="fs-5 mb-2" for="email">Correo electrónico</label><br>
-                        <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent border-blueultra"
-                            type="text" id="email" name="email" placeholder="Escriba su correo electrónico">
+                        <label class="fs-5 mb-2 d-block" for="email" style="margin-bottom: 5px;">Correo electrónico
+                            <input class="fs-6 text-light w-100 rounded-pill py-2 my-2 px-3 bg-transparent border-blueultra" type="text"
+                                id="email" name="email" placeholder="Escriba su correo electrónico">
+                        </label>
                     </div>
                     <div>
-                        <label class="fs-5 mb-2" for="password">Contraseña</label><br>
-                        <input class="text-light w-100 rounded-pill py-2 px-3 bg-transparent border-blueultra"
-                            type="text" id="password" name="password" placeholder="Escriba su contraseña">
+                        <label class="fs-5 mb-2 d-block" for="password" style="margin-bottom: 5px;">Contraseña
+                            <input class="fs-6 text-light w-100 rounded-pill py-2 my-2 px-3 bg-transparent border-blueultra" type="password"
+                                id="password" name="password" placeholder="Escriba su contraseña">
+                        </label>
                     </div>
                     <button
                         class="hvr-shutter-out-horizontal fs-5 my-3 text-light w-100 rounded-pill py-1 px-3 border-blueultra"
                         type="submit">Registrarse</button>
                 </form>
+
+                @if (Session::has('status.error'))
+                    <div class="fs-6 my-3 text-center text-light w-100 rounded-pill py-1 px-3 border-warnred"
+                        id="registerErrorContainer">
+                        {{ Session::get('status.error') }}
+                    </div>
+                @endif
+
             </div>
 
             <div class="col-8">
@@ -149,7 +163,7 @@
 
     <section id="nav-container" @if ($background == null) class="bg-darkgray" @endif>
         <nav class="bg-dark nav-transparent navbar navbar-expand-lg">
-            <div class="col-10 py-3 container-fluid">
+            <div class="col-12 col-xl-10 py-3 container-fluid">
                 <h1 class="rafginsFont fs-3 m-0" style="z-index: 200;"><a href={{ url('/') }}
                         class="text-light text-decoration-none">Sky<span class="text-blueultra">Scenic</span></a>
                 </h1>
@@ -189,6 +203,13 @@
                             @if (auth()->user()->role == 'admin')
                                 <li class="nav-item"><a href={{ url('/noticias/subir') }}
                                         class="hvr-underline-from-left text-light text-decoration-none">Subir Noticia</a>
+                                </li>
+
+                                <li class="nav-item"><a href={{ url('/admin/usuarios') }}
+                                        class="hvr-underline-from-left text-light text-decoration-none">Admin Usuarios</a>
+
+                                <li class="nav-item"><a href={{ url('/admin/noticias') }}
+                                        class="hvr-underline-from-left text-light text-decoration-none">Admin Noticias</a>
                                 </li>
 
                                 <li class="nav-item"><a href={{ url('/admin') }}

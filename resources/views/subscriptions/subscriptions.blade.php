@@ -7,8 +7,7 @@
 @section('content')
     <main class="d-flex bg-darkblack">
         @if (session()->has('status') && isset(session('status')['message']))
-            <div id="status-message" class="position-absolute alert text-light bg-blueultra my-5"
-                style="left: 40px; z-index: 200;">
+            <div id="status-message" class="position-absolute alert text-light bg-blueultra my-5 status-message-position">
                 {{ session('status')['message'] }}
             </div>
         @endif
@@ -17,8 +16,7 @@
                 <section id="subscription-container"
                     class="d-flex flex-column justify-content-center align-items-center mx-auto gap-5">
                     <div class="d-flex flex-column gap-4 col-10 text-center">
-                        <h2 class="text-light fs-1">¡Gracias por suscribirte a nuestro servicio <span
-                                class="text-blueultra">{{ auth()->user()->username }}</span>!</h2>
+                        <h2 class="text-light fs-1 text-blueultra">¡Gracias por suscribirte a nuestro servicio <span>{{ auth()->user()->username }}</span>!</h2>
                         <p class="text-light">A partir de ahora vas a poder descargar las imágenes sin la marca de agua y con el uso libre para tus proyectos de manera comercial o para uso privado dirigiendote a la foto de tu elección y tocando el botón <span class="text-blueultra">"Descargar Imágen"</span> debajo de la misma.<br>¡Esperamos que disfrutes del servicio!</p>
                     </div>
                     <div class="d-flex flex-column col-10 text-center">
@@ -66,12 +64,3 @@
         @endauth
     </main>
 @endsection
-
-<script>
-    setTimeout(function() {
-        var statusMessage = document.getElementById('status-message');
-        if (statusMessage) {
-            statusMessage.style.display = 'none';
-        }
-    }, 5000);
-</script>

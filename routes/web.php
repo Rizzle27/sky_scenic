@@ -61,7 +61,18 @@ Route::post('/suscripcion', [\App\Http\Controllers\SubscriptionController::class
 Route::get('/admin', [\App\Http\Controllers\AdminController::class, 'admin'])
     ->middleware(['auth', 'admin']);
 
-Route::get('/admin/ususarios', [\App\Http\Controllers\AdminController::class, 'news'])
+Route::get('/admin/usuarios/{id}', [\App\Http\Controllers\UsersController::class, 'view'])
+    ->whereNumber('id')
+    ->middleware(['auth', 'admin']);
+
+
+Route::get('/admin/usuarios ', [\App\Http\Controllers\UsersController::class, 'users'])
+    ->middleware(['auth', 'admin']);
+
+Route::post('/admin/usuarios/rol', [\App\Http\Controllers\UsersController::class, 'userRole'])
+    ->middleware(['auth', 'admin']);
+
+Route::post('/admin/usuarios/eliminar', [\App\Http\Controllers\UsersController::class, 'deleteProcess'])
     ->middleware(['auth', 'admin']);
 
 Route::get('/admin/noticias', [\App\Http\Controllers\AdminController::class, 'news'])

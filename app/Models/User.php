@@ -21,7 +21,7 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'rol',
+        'role',
         'subscribed',
     ];
 
@@ -44,4 +44,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function photos() {
+        return $this->hasMany(Photo::class, 'id');
+    }
 }

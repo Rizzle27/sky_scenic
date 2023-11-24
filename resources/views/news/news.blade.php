@@ -19,17 +19,17 @@
         <section
             class="d-flex flex-column justify-content-center mx-auto col-12 col-md-10 text-light px-2 px-md-0 py-5 gap-3">
 
-            <h2 class="fs-5">Noticias</h2>
+            <h1 class="fs-5">Noticias</h1>
             <div class="newsCardContainer w-100">
                 @foreach ($news as $new)
                     <div class="newCard rounded-3 w-100 bg-darkgray">
                         <a href="{{ url('/noticias/' . $new->id) }}" class="text-decoration-none text-light">
                             <div class="d-flex flex-column justify-content-between gap-2 py-3 px-4">
-                                <h3 class="fs-4 fw-normal mb-0" class="text-blueultra">
+                                <h2 class="fs-4 fw-normal mb-0 text-blueultra">
                                     {{ $new->title }}
-                                </h3>
+                                </h2>
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h4 class="fs-6 fw-normal  mb-0">{{ $new->subtitle }}</h4>
+                                    <h3 class="fs-6 fw-normal  mb-0">{{ $new->subtitle }}</h3>
                                 </div>
                             </div>
                             <img class="w-100 p-2" src="{{ asset('images/news/'.$new->img_path) }}" alt="{{ $new->title }} - {{ $new->subtitle }}" style="border-radius: 12px">

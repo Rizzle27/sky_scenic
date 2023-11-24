@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function loginProcess(Request $request) {
+    public function loginProcess(Request $request)
+    {
         $credentials = $request->only(['username', 'password']);
 
         if (!Auth::attempt($credentials)) {
@@ -19,7 +20,8 @@ class AuthController extends Controller
         return redirect()->route('index')->with('logged.user', auth()->user()->username);
     }
 
-    public function logoutProcess(Request $request) {
+    public function logoutProcess(Request $request)
+    {
         Auth::logout();
 
         $request->session()->invalidate();
@@ -31,14 +33,20 @@ class AuthController extends Controller
 
     public function signupProcess(Request $request)
     {
-        $data = $request->input();
+        try {
+            $validatedData = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+                'username' => 'required',
+            ]);
 
-        $data = $request->only(['username', 'email', 'password']);
+            $user = User::create($validatedData);
 
-        $user = User::create($data);
+            Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect('/')->with('status.message', 'Usuario creado con éxito');
+            return redirect('/')->with('status.message', 'Usuario creado con éxito');
+        } catch (\Exception $e) {
+            return redirect()->back()->withInput()->with('status.error', $e->getMessage());
+        }
     }
 }

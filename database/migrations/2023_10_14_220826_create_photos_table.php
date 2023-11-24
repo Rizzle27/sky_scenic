@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
+            $table->string('author');
             $table->string('aircraft');
             $table->string('license_plate');
             $table->string('airline');
@@ -20,7 +21,6 @@ return new class extends Migration
             $table->string('country');
             $table->string('img_path');
             $table->string('img_path_copyright');
-            $table->string('author');
             $table->date('date');
             $table->timestamps();
         });

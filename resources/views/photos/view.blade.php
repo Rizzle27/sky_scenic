@@ -60,9 +60,8 @@
                         <div class="col-10 col-lg-3">
                             <div class="rounded-3 bg-darkgray">
                                 <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                    <div style="height: 200px">
+                                    <div class="relatedImageContainer">
                                         <img class="object-fit-cover rounded-top-3"
-                                            style="width: 100%; height: 100%; object-fit: cover;"
                                             src="{{ asset('images/photos/copy/' . $photo->img_path_copyright) }}"
                                             alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
                                             title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
@@ -70,12 +69,12 @@
 
                                     <div class="d-flex flex-column justify-content-between card-body p-4">
 
-                                        <h4 class="fs-6 fw-normal mb-3" class="text-blueultra">
+                                        <h3 class="fs-6 fw-normal mb-3 text-blueultra">
                                             {{ Str::limit($photo->aircraft, 18, '...') }}
-                                        </h4>
+                                        </h3>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->license_plate }}</h4>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->author }}</h4>
                                         </div>
 
                                     </div>
@@ -96,9 +95,8 @@
                         <div class="col-10 col-lg-3">
                             <div class="rounded-3 bg-darkgray">
                                 <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                    <div style="height: 200px">
+                                    <div class="relatedImageContainer">
                                         <img class="object-fit-cover rounded-top-3"
-                                            style="width: 100%; height: 100%; object-fit: cover;"
                                             src="{{ asset('images/photos/copy/' . $photo->img_path_copyright) }}"
                                             alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
                                             title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
@@ -106,12 +104,12 @@
 
                                     <div class="d-flex flex-column justify-content-between card-body p-4">
 
-                                        <h4 class="fs-6 fw-normal mb-3" class="text-blueultra">
+                                        <h3 class="fs-6 fw-normal mb-3 text-blueultra">
                                             {{ Str::limit($photo->aircraft, 18, '...') }}
-                                        </h4>
+                                        </h3>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->license_plate }}</h4>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->author }}</h4>
                                         </div>
 
                                     </div>
@@ -132,9 +130,8 @@
                         <div class="col-10 col-lg-3">
                             <div class="rounded-3 bg-darkgray">
                                 <a href="{{ url('/fotos/' . $photo->id) }}" class="text-decoration-none text-light">
-                                    <div style="height: 200px">
+                                    <div class="relatedImageContainer">
                                         <img class="object-fit-cover rounded-top-3"
-                                            style="width: 100%; height: 100%; object-fit: cover;"
                                             src="{{ asset('images/photos/copy/' . $photo->img_path_copyright) }}"
                                             alt="{{ $photo->aircraft }} - {{ $photo->airline }}"
                                             title="Foto de {{ $photo->aircraft }} tomada en {{ $photo->location }}, {{ $photo->country }}">
@@ -142,12 +139,12 @@
 
                                     <div class="d-flex flex-column justify-content-between card-body p-4">
 
-                                        <h4 class="fs-6 fw-normal mb-3" class="text-blueultra">
+                                        <h3 class="fs-6 fw-normal mb-3 text-blueultra">
                                             {{ Str::limit($photo->aircraft, 18, '...') }}
-                                        </h4>
+                                        </h3>
                                         <div class="d-flex w-100 justify-content-between">
-                                            <h5 class="fs-6 fw-normal">{{ $photo->license_plate }}</h5>
-                                            <h5 class="fs-6 fw-normal">{{ $photo->author }}</h5>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->license_plate }}</h4>
+                                            <h4 class="fs-6 fw-normal">{{ $photo->author }}</h4>
                                         </div>
 
                                     </div>
@@ -160,20 +157,3 @@
         @endif
     </main>
 @endsection
-
-<script>
-    function imageDownload(imagePath) {
-        var imageRoute = imagePath;
-
-        var enlaceTemporal = document.createElement('a');
-        enlaceTemporal.href = imageRoute;
-        enlaceTemporal.target = '_blank';
-        enlaceTemporal.download = imagePath || 'imagen_descarga';
-
-        document.body.appendChild(enlaceTemporal);
-
-        enlaceTemporal.click();
-
-        document.body.removeChild(enlaceTemporal);
-    }
-</script>

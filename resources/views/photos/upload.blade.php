@@ -12,45 +12,44 @@ use Illuminate\Support\ViewErrorBag;
 @endsection
 
 @section('content')
-    <main class="d-flex" style="background-color: #292929">
+    <main class="d-flex bg-darkgray">
 
         @if (session()->has('status') && isset(session('status')['message']))
-            <div id="status-message" class="position-absolute alert text-light"
-                style="background-color: #3E74FF; left: 40px; z-index: 200;">
+            <div id="status-message" class="position-absolute alert text-light status-message-position bg-blueultra">
                 {{ session('status')['message'] }}
             </div>
         @endif
 
         @if ($errors->any())
-            <div id="error-message" class="position-absolute alert text-light bg-danger" style="left: 40px; z-index: 200;">
+            <div id="error-message" class="position-absolute alert text-light bg-danger status-message-position">
                 <p class="m-0">Hubo un error en el formulario. Por favor, haga una revisión y vuelva a intentar.</p>
             </div>
         @endif
 
         <section id="createForm" class="d-flex flex-column col-12 justify-content-center mx-auto gap-4 pb-4">
             <h2 class="text-light col-8 mx-auto">Subir Una Nueva Foto</h2>
-            <form class="d-flex flex-column text-light" action="{{ url('/fotos/subir') }}" method="POST"
-                enctype="multipart/form-data">
+            <form action="{{ url('/fotos/subir') }}" method="POST" enctype="multipart/form-data"
+                class="d-flex flex-column text-light">
                 @csrf
 
                 <div class="d-flex flex-column flex-lg-row justify-content-between py-3 col-8 mx-auto">
                     <div class="d-flex flex-column col-12 col-lg-5">
-                        <input type="file" class="form-control" name="img_path_copyright" onchange="loadFileCopy(event)"/>
+                        <label class="d-block" for="img_path_copyright" style="margin-bottom: 5px;">Foto con marca de
+                            agua</label>
+                        <input type="file" class="form-control" name="img_path_copyright"
+                            onchange="loadFileCopy(event)" />
 
-                        <p class="py-2">Subí tu foto con marca de agua</p>
-
-                        <img id="img_path_copyright_output" class="w-100 pb-3">
+                        <img id="img_path_copyright_output" class="w-100 py-3">
 
                         @error('img_path_copyright')
                             <p class="text-danger text-center">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="d-flex flex-column col-12 col-lg-5">
-                        <input type="file" class="form-control" name="img_path" onchange="loadFile(event)"/>
+                        <label class="d-block" for="img_path" style="margin-bottom: 5px;">Foto sin marca de agua</label>
+                        <input type="file" class="form-control" name="img_path" onchange="loadFile(event)" />
 
-                        <p class="py-2">Subí tu foto sin marca de agua</p>
-
-                        <img id="img_path_output" class="w-100 pb-3">
+                        <img id="img_path_output" class="w-100 py-3">
 
                         @error('img_path')
                             <p class="text-danger text-center">{{ $message }}</p>
@@ -58,7 +57,8 @@ use Illuminate\Support\ViewErrorBag;
                     </div>
                 </div>
 
-                <p class="col-8 mx-auto pb-2">Tengase en cuenta que si se sube una foto sin marca de agua el sitio no es responsable por la descarga indebida de las mismas.</p>
+                <p class="col-8 mx-auto pb-2">Tengase en cuenta que si se sube una foto sin marca de agua el sitio no es
+                    responsable por la descarga indebida de las mismas.</p>
 
                 <div id="features" class="d-flex flex-column flex-lg-row col-8 mx-auto">
                     <div class="featureSection d-flex flex-column col-12 col-lg-2">
@@ -111,41 +111,8 @@ use Illuminate\Support\ViewErrorBag;
                     <input type="text" id="author" name="author" value="{{ auth()->user()->username }}" hidden>
                 </div>
 
-                <button class="hvr-shutter-out-horizontal fs-5 my-3 text-light rounded-pill py-1 px-3 w-50 mx-auto my-5"
-                    style="border: 2px solid #3E74FF;" type="submit">Subir</button>
+                <button class="hvr-shutter-out-horizontal fs-5 my-3 text-light rounded-pill py-1 px-3 w-50 mx-auto my-5 border-blueultra" type="submit">Subir</button>
             </form>
         </section>
     </main>
 @endsection
-
-<script>
-    var loadFile = function(event) {
-        var output = document.getElementById('img_path_output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function() {
-            URL.revokeObjectURL(output.src)
-        }
-    };
-
-    var loadFileCopy = function(event) {
-        var output = document.getElementById('img_path_copyright_output');
-        output.src = URL.createObjectURL(event.target.files[0]);
-        output.onload = function() {
-            URL.revokeObjectURL(output.src)
-        }
-    };
-
-    setTimeout(function() {
-        var statusMessage = document.getElementById('status-message');
-        if (statusMessage) {
-            statusMessage.style.display = 'none';
-        }
-    }, 5000);
-
-    setTimeout(function() {
-        var errorMessage = document.getElementById('error-message');
-        if (errorMessage) {
-            errorMessage.style.display = 'none';
-        }
-    }, 5000);
-</script>
